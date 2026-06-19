@@ -1,0 +1,121 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+      - feature/**
+
+  workflow_dispatch:
+
+  schedule:
+    - cron: '0 3 * * *'
+
+env:
+  NODE_VERSION: 20.x
+
+jobs:
+  format:
+    name: Verificação de Formatação
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Verificar formatação
+        run: npm run format:check
+
+  lint:
+    name: Análise Estática
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Executar ESLint
+        run: npm run lint
+
+  tests:
+    name: Testes Automatizados
+    runs-on: ubuntu-latest
+
+    needs:
+      - format
+      - lint
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Executar testes com cobertura
+        run: npm run test:ci
+        env:
+          JEST_JUNIT_OUTPUT_DIR: test-results
+          JEST_JUNIT_OUTPUT_NAME: junit.xml
+
+      - name: Publicar relatório de testes
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-report
+          path: test-results/
+
+      - name: Publicar relatório de cobertura
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage/
+
+  summary:
+    name: Resumo da Pipeline
+    runs-on: ubuntu-latest
+
+    needs:
+      - format
+      - lint
+      - tests
+
+    if: always()
+
+    steps:
+      - name: Gerar resumo
+        run: |
+          echo "# Resultado da Pipeline" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Verificação de formatação" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Análise estática (ESLint)" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Testes automatizados" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Cobertura de testes" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Os relatórios estão disponíveis na seção Artifacts da execução." >> $GITHUB_STEP_SUMMARY
