@@ -10,7 +10,8 @@
     "test": "jest",
     "test:ci": "jest --ci --coverage",
     "lint": "eslint .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "format:write": "prettier --write ."
   },
   "jest-junit": {
     "outputDirectory": "./test-results",

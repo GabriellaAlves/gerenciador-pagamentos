@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
   schedule:
-    - cron: '0 3 * * *'
+    - cron: "0 3 * * *"
 
 env:
   NODE_VERSION: 20.x
@@ -57,7 +57,7 @@ jobs:
         run: npm run lint
 
   tests:
-    name: Testes Automatizados
+    name: Testes Unitátios
     runs-on: ubuntu-latest
 
     needs:

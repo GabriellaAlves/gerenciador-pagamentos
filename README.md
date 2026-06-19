@@ -10,12 +10,12 @@ A solução utiliza GitHub Actions para executar verificações automáticas em 
 
 # Tecnologias Utilizadas
 
-* GitHub Actions
-* Node.js
-* Jest
-* jest-junit
-* ESLint
-* Prettier
+- GitHub Actions
+- Node.js
+- Jest
+- jest-junit
+- ESLint
+- Prettier
 
 ---
 
@@ -35,7 +35,7 @@ push:
 
 Benefício:
 
-* Validação automática das alterações enviadas ao repositório.
+- Validação automática das alterações enviadas ao repositório.
 
 ---
 
@@ -57,7 +57,7 @@ Actions
 
 Benefício:
 
-* Permite validar o projeto sob demanda sem necessidade de realizar um commit.
+- Permite validar o projeto sob demanda sem necessidade de realizar um commit.
 
 ---
 
@@ -67,12 +67,12 @@ A pipeline também é executada automaticamente todos os dias às 03:00 UTC:
 
 ```yaml
 schedule:
-  - cron: '0 3 * * *'
+  - cron: "0 3 * * *"
 ```
 
 Benefício:
 
-* Detecta falhas causadas por mudanças em dependências externas ou ambiente de execução.
+- Detecta falhas causadas por mudanças em dependências externas ou ambiente de execução.
 
 ---
 
@@ -102,8 +102,8 @@ npm run format:check
 
 Objetivo:
 
-* Garantir padronização visual do código.
-* Evitar divergências de estilo entre desenvolvedores.
+- Garantir padronização visual do código.
+- Evitar divergências de estilo entre desenvolvedores.
 
 ---
 
@@ -119,9 +119,9 @@ npm run lint
 
 Objetivo:
 
-* Detectar erros de sintaxe.
-* Identificar más práticas de desenvolvimento.
-* Aplicar padrões de qualidade definidos pelo projeto.
+- Detectar erros de sintaxe.
+- Identificar más práticas de desenvolvimento.
+- Aplicar padrões de qualidade definidos pelo projeto.
 
 ---
 
@@ -145,9 +145,9 @@ npm run test:ci
 
 Objetivo:
 
-* Executar os testes automatizados.
-* Gerar cobertura de código.
-* Produzir relatórios de execução.
+- Executar os testes automatizados.
+- Gerar cobertura de código.
+- Produzir relatórios de execução.
 
 ---
 
@@ -157,7 +157,7 @@ Responsável por gerar um resumo da execução da pipeline utilizando o GitHub S
 
 Objetivo:
 
-* Facilitar a visualização dos resultados diretamente na execução do workflow.
+- Facilitar a visualização dos resultados diretamente na execução do workflow.
 
 ---
 
@@ -206,12 +206,12 @@ test-results/junit.xml
 
 Formato:
 
-* JUnit XML
+- JUnit XML
 
 Objetivo:
 
-* Integração com ferramentas de qualidade.
-* Histórico de execuções.
+- Integração com ferramentas de qualidade.
+- Histórico de execuções.
 
 ---
 
@@ -236,7 +236,7 @@ coverage/
 
 Objetivo:
 
-* Medir o percentual de código coberto por testes automatizados.
+- Medir o percentual de código coberto por testes automatizados.
 
 ---
 
@@ -328,11 +328,11 @@ Mantém histórico completo dos resultados por meio dos artefatos publicados.
 
 A arquitetura baseada em múltiplos jobs facilita futuras expansões da pipeline, como:
 
-* SonarQube
-* SAST
-* Testes E2E
-* Build Docker
-* Deploy automatizado
+- SonarQube
+- SAST
+- Testes E2E
+- Build Docker
+- Deploy automatizado
 
 ---
 
@@ -340,12 +340,12 @@ A arquitetura baseada em múltiplos jobs facilita futuras expansões da pipeline
 
 Ao final de cada execução a pipeline deve:
 
-* Validar a formatação do código.
-* Executar análise estática.
-* Executar testes automatizados.
-* Gerar relatório JUnit.
-* Gerar cobertura de testes.
-* Publicar relatórios como artefatos.
-* Disponibilizar um resumo da execução no GitHub Actions.
+- Validar a formatação do código.
+- Executar análise estática.
+- Executar testes automatizados.
+- Gerar relatório JUnit.
+- Gerar cobertura de testes.
+- Publicar relatórios como artefatos.
+- Disponibilizar um resumo da execução no GitHub Actions.
 
 Dessa forma, a solução atende aos requisitos de Integração Contínua, automação de testes, qualidade de código e rastreabilidade dos resultados.
