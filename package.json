@@ -7,15 +7,11 @@
     "test": "test"
   },
   "scripts": {
-    "test": "jest",
-    "test:ci": "jest --ci --coverage",
+    "test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js",
+    "test:ci": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js --ci --coverage",
     "lint": "eslint .",
     "format:check": "prettier --check .",
     "format:write": "prettier --write ."
-  },
-  "jest-junit": {
-    "outputDirectory": "./test-results",
-    "outputName": "junit.xml"
   },
   "jest": {
     "collectCoverage": true,
@@ -34,7 +30,7 @@
     "url": "git+https://github.com/GabriellaAlves/gerenciador-pagamentos.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Gabriella Alves",
   "license": "ISC",
   "type": "module",
   "bugs": {
