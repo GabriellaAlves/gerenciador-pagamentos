@@ -8,10 +8,13 @@
   },
   "scripts": {
     "test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js",
-    "test:ci": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js --ci --coverage",
-    "lint": "eslint .",
+"test:ci": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js --ci --coverage --reporters=default --reporters=jest-junit",    "lint": "eslint .",
     "format:check": "prettier --check .",
     "format:write": "prettier --write ."
+  },
+  "jest-junit": {
+    "outputDirectory": "./test-results",
+    "outputName": "junit.xml"
   },
   "jest": {
     "collectCoverage": true,
